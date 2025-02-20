@@ -1,5 +1,4 @@
-; Bibidh was here!
-; Safal 123
+
 
 .model small
 .stack 100h
@@ -87,27 +86,19 @@ clearScreen endp
 
 
 drawline proc near    
-  
-
     mov dx , 180
     mov ah, 00h
     mov al, 13h
     int 10h
-
     mov cx, 0
-    
-
-l1:  
+  l1:  
     mov ah, 0Ch
     mov al, 04h
     mov bh, 00h
     int 10h
-
-    inc cx
+   inc cx
     cmp cx, 320
     jne l1  
-    
-
     ret
 drawline endp
 
