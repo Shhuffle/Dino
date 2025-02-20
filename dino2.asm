@@ -4,12 +4,20 @@
 
 
 .data 
+  ;dino dimensions   offset addreess dinodimen each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn] 
+  dinodimen dw 15 , 160 , 120 , 180 , 130
+  
 
-
+  ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
+ objectdimen dw 4 , 150 , 170 , 180 , 180
+  
+  
+  
 
 
 .code
-    include proc1.inc 
+    ;include path to the folder
+    include inc\draw.inc 
 
     main proc far 
         mov ax , @data
@@ -22,6 +30,8 @@
 
         call drawline
         ;wait for key input before exiting the program
+        call drawdino
+        call drawobstacle
         mov ah , 00h 
         int 16h 
 
@@ -29,6 +39,10 @@
         ;return contorl to the os
         mov ah , 4ch 
         int 21h
+
+
+
+
 
 
     main endp
