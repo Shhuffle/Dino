@@ -1,3 +1,22 @@
+
+
+; Subroutine to clear the keyboard buffer
+clear_keyboard_buffer proc far
+    ; Loop to read all characters from the keyboard buffer
+    clear_loop:
+        mov ah, 01h       ; BIOS function to check for keypress (non-blocking)
+        int 16h           ; Call BIOS interrupt
+        jz buffer_cleared ; If no key is available (ZF = 1), buffer is cleared
+
+        mov ah, 00h       ; BIOS function to read a key from the buffer
+        int 16h           ; Call BIOS interrupt (this removes the key from the buffer)
+        jmp clear_loop    ; Repeat until buffer is empty
+
+    buffer_cleared:
+clear_keyboard_buffer endp
+
+
+
 updateDino proc far
     ; The basic idea for now is 
     ; On key press from user
@@ -28,6 +47,21 @@ updateDino proc far
     ; IMPLEMENTATION
     lea si, dinodimen
 
+    xor ax ,ax ;clear register
+    xor cx ,cx 
+    mov ax , [si+12] ; check if going down
+    mov cx , [si+10] ; check if going up
+    or cx , ax 
+    cmp cx , 1
+    je dont_wait_for_key 
+
+     
+
+
+
+    normal:
+    xor ax ,ax ;clear ax
+
     ; Check key press
     mov ah , 01h
     int 16h
@@ -57,7 +91,6 @@ updateDino proc far
 
     ; Perfom regardless of if the key was entered or not!    
     dont_wait_for_key:
-
 
     ; if(y > someValue AND goingUp)
         ; y=y -1
@@ -92,6 +125,7 @@ updateDino proc far
             case2d:
             mov byte ptr [si+10],0
             mov byte ptr [si+12],0
+            call clear_keyboard_buffer
             jmp exit_sub
     cond_4_false:
 
@@ -142,6 +176,8 @@ updateDino proc far
             inc word ptr [si+6]
             mov byte ptr [si+10],0
             mov byte ptr [si+12],1
+ 
+            
             jmp exit_sub
     cond_3_false:
 
@@ -152,6 +188,7 @@ updateDino proc far
 
 ret
 updateDino endp
+
 
 
 updateObject proc far
