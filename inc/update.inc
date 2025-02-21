@@ -28,6 +28,20 @@ updateDino proc far
     ; IMPLEMENTATION
     lea si, dinodimen
 
+    mov ax , [si+12] ; check if going down
+    cmp ax , 1
+    jne normal
+    mov ax , [si+10] ; check if going up
+    cmp ax , 1
+    je dont_wait_for_key
+
+    
+
+
+
+    normal:
+    xor ax ,ax ;clear ax
+
     ; Check key press
     mov ah , 01h
     int 16h

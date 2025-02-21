@@ -12,7 +12,7 @@
   
 
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
-objectdimen dw 69 , 170 , 120 , 180 , 130 
+objectdimen dw 69 , 170 , 200 , 180 , 230 
 
 
 
