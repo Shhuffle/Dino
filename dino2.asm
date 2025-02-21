@@ -14,7 +14,7 @@
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
  
  objectdimen dw 40 , 170 , 170 , 180 , 180 
-    objectSpeed dw 10
+    objectSpeed dw 2
   
   
   clock dw 0
@@ -23,9 +23,10 @@
   
 
  deathMessage db "You are dead LOL, get better$"
+ scoreMessage db "Score : $"
  newLine db 0dh, 0ah, "$"
 
- score dw 0
+ score dw 120
 
 
   
@@ -51,6 +52,8 @@
         int 10h
 
         refresh:
+
+            call clearScreen
 
             cmp word ptr [clock], 65530 
             jb skipClock
@@ -103,18 +106,29 @@
             ; print 
             ; 200 height = 320 width
         
-        mov dh, 100
+        mov dh, 10
         mov dl, 160
         mov ah, 02h
         int 10h
 
-        lea si, deathMessage
+        mov dx, offset deathMessage
         mov ah, 09h
         int 21h
 
-        lea si, newLine
+        mov dx, offset newLine
         mov ah, 09h
         int 21h
+        mov dx, offset newLine
+        mov ah, 09h
+        int 21h
+
+
+        mov dx, offset scoreMessage
+        mov ah, 09h
+        int 21h
+
+        mov ax, [score]
+        call printDecScore
 
 
 
@@ -137,7 +151,6 @@
     end main 
     
     
-
 
 
 
