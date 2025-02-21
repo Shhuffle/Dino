@@ -3,4 +3,8 @@
 *.map
 *.com
 .vscode
+*.conf
 dosbox.conf
+temp.txt
+dino.asm
+*.crf

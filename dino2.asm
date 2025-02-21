@@ -21,6 +21,7 @@
 .code
     ;include path to the folder
     include inc\draw.inc 
+    include inc\update.inc
 
     main proc far 
         mov ax , @data
