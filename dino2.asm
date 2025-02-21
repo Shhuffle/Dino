@@ -21,28 +21,25 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
 
 
 
-  
-  
-
 
 .code
     ;include path to the folder
     include inc\draw.inc 
     include inc\update.inc
-     include inc\mes.inc
-     include inc\coll.inc
+    include inc\mes.inc
+    include inc\coll.inc
+    include inc\utils.inc
 
     main proc far 
         mov ax , @data
         mov ds , ax
         
+        ;to open a window in graphics mode
+        mov ah , 00h 
+        mov al ,13h
+        int 10h
 
         refresh:
-            ;to open a window in graphics mode
-            mov ah , 00h 
-            mov al ,13h
-            int 10h
-       
 
             ; Draw the base line
             call drawline
@@ -65,6 +62,8 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
             ; Check collision
             call collide 
 
+
+            call clearScreen
             ; check game over
             mov ah , [gamestate]
             cmp ah , 1
