@@ -15,11 +15,20 @@
 
  
  objectdimen dw 40 , 170 , 170 , 180 , 180 
-    objectSpeed dw 10
+    objectSpeed dw 2
   
   
   clock dw 0
  gamestate db 0 ; set the value to 1 if collision is detected 
+
+  
+
+ deathMessage db "You are dead LOL, get better$"
+ scoreMessage db "Score : $"
+ newLine db 0dh, 0ah, "$"
+
+ score dw 120
+
 
   
 
@@ -44,6 +53,8 @@
         int 10h
 
         refresh:
+
+            call clearScreen
 
             cmp word ptr [clock], 65530 
             jb skipClock
@@ -79,7 +90,6 @@
             call collide 
 
 
-            call clearScreen
             ; check game over
             mov ah , [gamestate]
             cmp ah , 1
@@ -88,6 +98,42 @@
          
         jmp refresh
         refresh_exit:
+
+        ; Now the game is over Show stuff to the player
+        ; Basic steps
+            ; Take cursur to the center of the screen
+            ; print the text
+            ; goto new line
+            ; print 
+            ; 200 height = 320 width
+        
+        mov dh, 10
+        mov dl, 160
+        mov ah, 02h
+        int 10h
+
+        mov dx, offset deathMessage
+        mov ah, 09h
+        int 21h
+
+        mov dx, offset newLine
+        mov ah, 09h
+        int 21h
+        mov dx, offset newLine
+        mov ah, 09h
+        int 21h
+
+
+        mov dx, offset scoreMessage
+        mov ah, 09h
+        int 21h
+
+        mov ax, [score]
+        call printDecScore
+
+
+
+
         ;wait for key input before exiting the program
         mov ah , 00h 
         int 16h 
@@ -106,7 +152,6 @@
     end main 
     
     
-
 
 
 
