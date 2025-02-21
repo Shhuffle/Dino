@@ -17,6 +17,14 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
 
 
  gamestate db 0 ; set the value to 1 if collision is detected 
+
+
+ deathMessage db "You are dead LOL, get better$"
+ newLine db 0dh, 0ah, "$"
+
+ score dw 0
+
+
   
 
 
@@ -40,6 +48,8 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
         int 10h
 
         refresh:
+            ; Clear the screen
+            call clearScreen
 
             ; Draw the base line
             call drawline
@@ -63,7 +73,6 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
             call collide 
 
 
-            call clearScreen
             ; check game over
             mov ah , [gamestate]
             cmp ah , 1
@@ -72,6 +81,31 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
          
         jmp refresh
         refresh_exit:
+
+        ; Now the game is over Show stuff to the player
+        ; Basic steps
+            ; Take cursur to the center of the screen
+            ; print the text
+            ; goto new line
+            ; print 
+            ; 200 height = 320 width
+        
+        mov dh, 100
+        mov dl, 160
+        mov ah, 02h
+        int 10h
+
+        lea si, deathMessage
+        mov ah, 09h
+        int 21h
+
+        lea si, newLine
+        mov ah, 09h
+        int 21h
+
+
+
+
         ;wait for key input before exiting the program
         mov ah , 00h 
         int 16h 
