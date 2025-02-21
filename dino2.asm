@@ -12,11 +12,14 @@
   
 
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
-objectdimen dw 69 , 170 , 120 , 180 , 130 
-
-
-
+ 
+ objectdimen dw 40 , 170 , 170 , 180 , 180 
+    objectSpeed dw 10
+  
+  
+  clock dw 0
  gamestate db 0 ; set the value to 1 if collision is detected 
+
   
 
 
@@ -41,6 +44,16 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
 
         refresh:
 
+            cmp word ptr [clock], 65530 
+            jb skipClock
+                mov [clock], 0
+            skipClock:
+                add word ptr [clock], 1
+               ;to open a window in graphics mode
+            mov ah , 00h 
+            mov al ,13h
+            int 10h
+
             ; Draw the base line
             call drawline
 
@@ -57,6 +70,8 @@ objectdimen dw 69 , 170 , 120 , 180 , 130
             mov [gamestate], ah
 
             ; Update Object
+           call updateObject
+            
 
 
             ; Check collision
