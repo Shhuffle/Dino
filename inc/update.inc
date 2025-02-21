@@ -191,3 +191,28 @@ updateDino endp
 
 
 
+updateObject proc far
+
+    mov ax, [clock]   
+    mov dx, 0         
+    mov cx, [objectSpeed]         
+    div cx            
+    cmp dx, 0         
+    jne exit          
+
+
+    mov si, offset objectdimen
+
+    cmp word ptr[si+8], 1
+    jnb inside
+    mov [si + 4] , 300
+    mov [si + 8], 310
+
+    inside:
+    sub word ptr [si+4], 1
+    sub word ptr [si+8], 1
+
+    exit:
+    
+ret
+updateObject endp
