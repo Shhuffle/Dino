@@ -30,7 +30,6 @@
  score dw 0
  scoreSpeed dw 70 ;  faster the score increses  slower will be the  
 
-
   
 
 
@@ -86,6 +85,8 @@
 
             ; Update the dino
             call updateDino
+            call updateDino
+            ; call updateDino
 
             mov ah , 0
             mov [gamestate], ah
