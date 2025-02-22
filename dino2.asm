@@ -15,7 +15,7 @@
 
  
  objectdimen dw 40 , 170 , 170 , 180 , 180 
-    objectSpeed dw 2
+    objectSpeed dw 1
   
   
   clock dw 0
@@ -27,7 +27,8 @@
  scoreMessage db "Score : $"
  newLine db 0dh, 0ah, "$"
 
- score dw 120
+ score dw 0
+ scoreSpeed dw 70 ; determins how fast the score increses greater value means slower speed
 
 
   
@@ -53,6 +54,7 @@
         int 10h
 
         refresh:
+            ;
 
             call clearScreen
 
@@ -89,7 +91,7 @@
             ; Check collision
             call collide 
 
-
+            call calcscore
             ; check game over
             mov ah , [gamestate]
             cmp ah , 1
@@ -128,6 +130,8 @@
         mov ah, 09h
         int 21h
 
+       
+
         mov ax, [score]
         call printDecScore
 
@@ -137,6 +141,11 @@
         ;wait for key input before exiting the program
         mov ah , 00h 
         int 16h 
+        
+
+
+
+        
 
   
         ;return contorl to the osb

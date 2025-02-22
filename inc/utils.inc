@@ -42,3 +42,16 @@ printDecScore proc
 
 ret
 
+calcscore proc far 
+    xor dx , dx 
+    mov ax , [clock]
+    mov cx , [scoreSpeed]
+    div cx 
+    cmp dx , 0
+    jne exitCalcScore
+    mov ax , [score]
+    inc ax 
+    mov [score] , ax 
+    exitCalcScore:  
+ret
+calcscore endp
