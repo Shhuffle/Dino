@@ -8,7 +8,7 @@
   ;dino dimensions   offset addreess dinodimen each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn] [goingUp] [goingDown]
   ;                                                                   -       +2    +4       +6       +8          +10       +12
   dinodimen dw 40 , 140 , 120 , 165 , 130, 0 ,0 
-  dinoJumpHeight dw 130 ;-> Not the height but the actual y-value
+  dinoJumpHeight dw 110 ;-> Not the height but the actual y-value
   
 
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
@@ -30,7 +30,8 @@
  score dw 0
  scoreSpeed dw 70 ;  faster the score increses  slower will be the  
 
-  
+  isInSprintMode dw 0
+  tempScore dw 0
 
 
 
@@ -85,7 +86,7 @@
 
             ; Update the dino
             call updateDino
-            call updateDino
+            ; call updateDino
             ; call updateDino
 
             mov ah , 0
