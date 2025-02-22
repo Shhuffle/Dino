@@ -8,7 +8,7 @@
   ;dino dimensions   offset addreess dinodimen each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn] [goingUp] [goingDown]
   ;                                                                   -       +2    +4       +6       +8          +10       +12
   dinodimen dw 40 , 140 , 120 , 165 , 130, 0 ,0 
-  dinoJumpHeight dw 100 ;-> Not the height but the actual y-value
+  dinoJumpHeight dw 130 ;-> Not the height but the actual y-value
   
 
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
@@ -48,25 +48,31 @@
         mov ax , @data
         mov ds , ax
         
-        ;to open a window in graphics mode
-        mov ah , 00h 
-        mov al ,13h
-        int 10h
 
         refresh:
-            ;
-
             call clearScreen
 
+            ;to open a window in graphics mode
+            mov ah , 00h 
+            mov al ,13h
+            int 10h
+
+            ; Clock calculation
             cmp word ptr [clock], 65530 
             jb skipClock
                 mov [clock], 0
             skipClock:
                 add word ptr [clock], 1
-               ;to open a window in graphics mode
-            mov ah , 00h 
-            mov al ,13h
+
+
+            ; print score to screen
+            mov dh, 100
+            mov dl, 100
+            mov ah, 02h
             int 10h
+            mov ax, [score]
+            call printDecScore
+
 
             ; Draw the base line
             call drawline
