@@ -28,8 +28,7 @@
  newLine db 0dh, 0ah, "$"
 
  score dw 0
- scoreSpeed dw 70 ; determins how fast the score increses greater value means slower speed
-
+ scoreSpeed dw 2 ; determins how fast the score increses greater value means slower speed
 
   
 
@@ -85,6 +84,8 @@
 
             ; Update the dino
             call updateDino
+            call updateDino
+            ; call updateDino
 
             mov ah , 0
             mov [gamestate], ah

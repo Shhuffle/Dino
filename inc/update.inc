@@ -203,14 +203,14 @@ updateObject proc far
 
     mov si, offset objectdimen
 
-    cmp word ptr[si+8], 1
+    cmp word ptr[si+8], 10
     jnb inside
     mov [si + 4] , 300
     mov [si + 8], 310
 
     inside:
-    sub word ptr [si+4], 1
-    sub word ptr [si+8], 1
+    sub word ptr [si+4], 4
+    sub word ptr [si+8], 4
 
     exit:
     
