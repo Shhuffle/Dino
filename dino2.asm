@@ -14,8 +14,8 @@
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
 
  
- objectdimen dw 40 , 170 , 170 , 180 , 180 
-    objectSpeed dw 1
+    objectdimen dw 40 , 170 , 170 , 180 , 180 
+    objectSpeed dw 4
   
   
   clock dw 0
@@ -28,7 +28,7 @@
  newLine db 0dh, 0ah, "$"
 
  score dw 0
- scoreSpeed dw 70 ; determins how fast the score increses greater value means slower speed
+ scoreSpeed dw 50 ; determins how fast the score increses greater value means slower speed
 
 
   
