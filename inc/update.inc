@@ -13,7 +13,40 @@ clear_keyboard_buffer proc far
         jmp clear_loop    ; Repeat until buffer is empty
 
     buffer_cleared:
+
+    ret
 clear_keyboard_buffer endp
+
+
+
+sprintMode proc far
+    ; inc word ptr [objectSpeed]
+
+    cmp [isInSprintMode] , 1
+    je noneedforlatch
+        mov ax , [score]
+        mov [tempScore] , ax 
+        add [tempScore] , 2
+        mov [isInSprintMode], 1
+        dec [objectSpeed]
+        jmp exit_sprint_rout
+        
+
+    noneedforlatch:
+    mov ax, [score]
+    cmp [tempScore],ax
+    jne exit_sprint_rout
+           
+        mov [isInSprintMode], 0
+        mov [tempScore] , 0
+        inc [objectSpeed]
+
+
+
+    exit_sprint_rout:
+
+ret
+sprintMode endp
 
 
 
@@ -43,6 +76,12 @@ updateDino proc far
             ; goingDown = true
             ; END
         
+
+    cmp [isInSprintMode], 1
+    jne xxy
+    call sprintMode
+
+    xxy:
 
     ; IMPLEMENTATION
     lea si, dinodimen
@@ -74,9 +113,16 @@ updateDino proc far
         mov ah, 0    
         int 16h
 
+        ; check if it is c
+        cmp al, 63h
+        jne zzzz
+        call sprintMode
+        zzzz:
+
         ; check if it is spacebar
         cmp al, 20h
         jne dont_wait_for_key
+
 
     
     ; y=y-1
@@ -87,6 +133,7 @@ updateDino proc far
     ; goingDown = false
     mov byte ptr [si+10], 1
     mov byte ptr [si+12], 0
+
 
 
     ; Perfom regardless of if the key was entered or not!    
