@@ -23,7 +23,7 @@
 
   
 
- deathMessage db "You are dead LOL, get better$"
+ deathMessage db "You are dead LOL, get better XoXO$"
  scoreMessage db "Score : $"
  newLine db 0dh, 0ah, "$"
 
