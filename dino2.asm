@@ -30,7 +30,8 @@
  score dw 0
  scoreSpeed dw 70 ;  faster the score increses  slower will be the  
 
-  
+  isInSprintMode dw 0
+  tempScore dw 0
 
 
 
@@ -85,7 +86,7 @@
 
             ; Update the dino
             call updateDino
-            call updateDino
+            ; call updateDino
             ; call updateDino
 
             mov ah , 0
