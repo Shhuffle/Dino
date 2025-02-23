@@ -78,7 +78,7 @@ ja speed3
 
 mov [objectSpeed] , 2
 
-mov [scoreSpeed] , 60 
+mov [scoreSpeed] , 50 
 jmp Speedexit
 speed3:
 
@@ -88,7 +88,7 @@ ja speed4
 
 mov [objectSpeed] , 3 
 
-mov [scoreSpeed] , 50 
+mov [scoreSpeed] , 30 
 jmp Speedexit
 speed4:
 
@@ -98,9 +98,29 @@ ja speed5
 
 mov [objectSpeed] , 4 
 
-mov [scoreSpeed] , 40 
+mov [scoreSpeed] , 20 
 jmp Speedexit
 speed5:
+
+
+cmp cx , 400
+ja speed6
+
+mov [objectSpeed] , 5 
+
+mov [scoreSpeed] , 20 
+jmp Speedexit
+speed6:
+
+cmp cx , 500
+ja speed7
+
+mov [objectSpeed] , 6
+
+mov [scoreSpeed] , 10 
+jmp Speedexit
+speed7:
+
 
 Speedexit:
 

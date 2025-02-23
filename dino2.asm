@@ -8,7 +8,7 @@
   ;dino dimensions   offset addreess dinodimen each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn] [goingUp] [goingDown]
   ;                                                                   -       +2    +4       +6       +8          +10       +12
   dinodimen dw 40 , 140 , 120 , 165 , 130, 0 ,0 
-  dinoJumpHeight dw 130 ;-> Not the height but the actual y-value
+  dinoJumpHeight dw 110 ;-> Not the height but the actual y-value
   
 
   ;obstacle dimenstions offset addreess object each value is  of word [color] [Row] [Column] [MaxRow] [MaxColumn]
@@ -23,7 +23,7 @@
 
   
 
- deathMessage db "You are dead LOL, get better$"
+ deathMessage db "You are dead LOL, get better XoXO$"
  scoreMessage db "Score : $"
  newLine db 0dh, 0ah, "$"
 
