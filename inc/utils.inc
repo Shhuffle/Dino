@@ -110,3 +110,34 @@ scoreObjectspeed proc far
 
 ret
 scoreObjectspeed endp
+
+
+Reset proc far  
+        inc byte ptr [totalSession]
+        mov byte ptr [score] , 0 
+        mov byte ptr[clock] , 0
+        mov byte ptr[scoreSpeed] , 70
+        mov byte ptr[isInSprintMode] , 0
+        mov byte ptr[gamestate] , 0
+        lea di , objectdimen
+        lea si , dinodimen
+        mov bl , [totalSession]
+        ;Reset the dimension for the dino 40 , 140 , 120 , 165 , 130, 0 ,0 
+        mov byte ptr[si] ,  bl
+        mov byte ptr[si+2] , 140
+        mov byte ptr[si+4] , 120
+        mov byte ptr[si+6] , 165
+        mov byte ptr[si+8] , 130
+        mov byte ptr[si+10] , 0
+        mov byte ptr[si+12] , 0
+        inc byte ptr [totalSession]
+        mov bl , [totalSession]
+        ;Reset the dimension for the obstacle  40 , 170 , 170 , 180 , 180 
+        mov byte ptr[di] , bl 
+        mov word ptr[di+2] , 170
+        mov byte ptr[di+4] , 170
+        mov byte ptr[di+6],180
+        mov word ptr[di+8] , 180
+        mov byte ptr[objectSpeed] , 1
+    ret 
+    reset endp 
