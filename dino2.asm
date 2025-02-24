@@ -23,7 +23,7 @@ objectSpeed dw 1 ; max value is 6
 
   
 
- deathMessage db "You are dead LOL, get better$"
+ deathMessage db "You are dead LOL, get better XoXO$"
  scoreMessage db "Score : $"
  HighScoreMes db "HighScore : $"
  newLine db 0dh, 0ah, "$"
