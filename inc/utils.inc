@@ -64,50 +64,55 @@ scoreObjectspeed proc far
     ; if is in sprint mode just exit
     cmp isInSprintMode, 1
     je Speedexit
-
     mov cx , [score] ;
-
     cmp cx , 10
     ja speed2
-
     mov [objectSpeed] , 1 
     mov [scoreSpeed] , 70
     jmp Speedexit
+    
     speed2:
-
-
     cmp cx , 50
     ja speed3
-
     mov [objectSpeed] , 2
-
     mov [scoreSpeed] , 60 
     jmp Speedexit
     speed3:
 
-
     cmp cx , 200
     ja speed4
-
     mov [objectSpeed] , 3 
-
     mov [scoreSpeed] , 50 
     jmp Speedexit
     speed4:
-
-
     cmp cx , 300
     ja speed5
-
     mov [objectSpeed] , 4 
-
     mov [scoreSpeed] , 40 
     jmp Speedexit
+    
     speed5:
-
+    cmp cx , 300
+    ja speed5
+    mov [objectSpeed] , 4 
+    mov [scoreSpeed] , 40 
+    jmp Speedexit
+    
+    speed5:
+    cmp cx , 400
+    ja speed6
+    mov [objectSpeed] , 5 
+    mov [scoreSpeed] , 30 
+    jmp Speedexit
+   
+    speed6:
+    cmp cx , 500
+    ja speed7
+    mov [objectSpeed] , 6 
+    mov [scoreSpeed] , 30 
+    jmp Speedexit
+    speed7:
     Speedexit:
-
-
 ret
 scoreObjectspeed endp
 
