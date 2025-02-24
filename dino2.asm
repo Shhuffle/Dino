@@ -74,6 +74,9 @@ objectSpeed dw 1 ; max value is 6
             mov al ,13h
             int 10h
 
+           
+            
+
             ; Clock calculation
             cmp word ptr [clock], 65530 
             jb skipClock
@@ -185,10 +188,10 @@ objectSpeed dw 1 ; max value is 6
 
 
 
-        ;wait for key input before exiting the program and if it is a enter then restart the game
+        ;wait for key input before exiting the program and if it is a space then restart the game
         mov ah , 00h 
         int 16h 
-        cmp al , 13
+        cmp al , 20h
         jne Gameexit 
         call Reset ; Macro 
         jmp refresh
