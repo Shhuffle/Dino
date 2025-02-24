@@ -93,25 +93,16 @@ scoreObjectspeed proc far
     
     speed5:
     cmp cx , 300
-    ja speed5
-    mov [objectSpeed] , 4 
+    ja speed6
+    mov [objectSpeed] , 5 
     mov [scoreSpeed] , 40 
     jmp Speedexit
     
-    speed5:
-    cmp cx , 400
-    ja speed6
-    mov [objectSpeed] , 5 
-    mov [scoreSpeed] , 30 
-    jmp Speedexit
-   
     speed6:
-    cmp cx , 500
-    ja speed7
+    cmp cx , 400
+    ja Speedexit
     mov [objectSpeed] , 6 
     mov [scoreSpeed] , 30 
-    jmp Speedexit
-    speed7:
     Speedexit:
 ret
 scoreObjectspeed endp
